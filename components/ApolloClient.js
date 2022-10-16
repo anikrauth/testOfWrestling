@@ -6,7 +6,7 @@ import {
   
   
   const link = createHttpLink({
-  uri: "https://wrestlingworld.co/graphql",
+  uri: "https://west.goonut.com/graphql",
   credentials: 'same-origin'
   });
   
