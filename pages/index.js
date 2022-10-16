@@ -1,8 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import {NEWS_ARTICLES} from '../components/Query'
+import client from '../components/ApolloClient'
 
-export default function Home() {
+export default function Home({NewsData}) {
+
+  console.log(NewsData)
   return (
     <div className={styles.container}>
       <Head>
@@ -66,4 +70,16 @@ export default function Home() {
       </footer>
     </div>
   )
+}
+
+
+export async function getStaticProps() {
+  const resNews = await client.query({ query: NEWS_ARTICLES });
+
+  return {
+    props: {
+      NewsData: resNews.data.posts.nodes || null,
+    },
+    revalidate: 10,
+  };
 }
